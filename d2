@@ -1,0 +1,105 @@
+shared.targetapi = {}
+
+local BleachhackTargetHud = Instance.new("ScreenGui")
+BleachhackTargetHud.Name = "BleachhackTargetHud"
+BleachhackTargetHud.Parent = game.CoreGui
+local TargetHud = Instance.new("Frame")
+TargetHud.Name = "TargetHud"
+TargetHud.Parent = BleachhackTargetHud
+TargetHud.BackgroundColor3 = Color3.fromRGB(93, 13, 13)
+TargetHud.BackgroundTransparency = 1
+TargetHud.Position = UDim2.new(0.48568362, 0, 0.476928383, 0)
+TargetHud.Size = UDim2.new(0, 251, 0, 82)
+TargetHud.Visible = false
+local targetinfoscale = Instance.new("UIScale")
+targetinfoscale.Parent = TargetHud
+TargetHud:GetPropertyChangedSignal("Size"):connect(function()
+    local oldxoffset = TargetHud.Size.X.Offset
+    local oldyoffset = TargetHud.Size.Y.Offset
+    task.wait()
+    targetinfoscale.Scale = oldxoffset / (shared.currentXoffset or 307)
+    targetinfoscale.Scale = oldyoffset / (shared.currentYoffset or 104)
+end)
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = TargetHud
+MainFrame.BackgroundColor3 = Color3.fromRGB(4, 4, 4)
+MainFrame.BackgroundTransparency = 0.300
+MainFrame.BorderColor3 = Color3.fromRGB(150, 5, 5)
+MainFrame.BorderSizePixel = 4
+MainFrame.Position = UDim2.new(0, 4, 0, 0)
+MainFrame.Size = UDim2.new(1, -8, 0.944745004, 0)
+local playericon = Instance.new("ImageLabel")
+playericon.Name = "playericon"
+playericon.Parent = MainFrame
+playericon.BorderSizePixel = 0
+playericon.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+playericon.BackgroundTransparency = 1
+playericon.Position = UDim2.new(0, 10, 0, 10)
+playericon.Size = UDim2.new(0, 50, 0, 50)
+playericon.Image = "rbxthumb://type=AvatarHeadShot&id=4276485997&w=420&h=420"
+local name = Instance.new("TextLabel")
+name.Name = "name"
+name.Parent = MainFrame
+name.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+name.BackgroundTransparency = 1
+name.Position = UDim2.new(0.300000012, 0, 0.153999999, 0)
+name.Size = UDim2.new(0, 50, 0, 24)
+name.Font = Enum.Font.Ubuntu
+name.Text = "Name:"
+name.TextColor3 = Color3.fromRGB(255, 255, 255)
+name.TextSize = 18
+name.TextXAlignment = Enum.TextXAlignment.Left
+local HealthBarBackground = Instance.new("Frame")
+HealthBarBackground.Name = "HealthBarBackground"
+HealthBarBackground.Parent = MainFrame
+HealthBarBackground.BackgroundColor3 = Color3.fromRGB(4, 4, 4)
+HealthBarBackground.BackgroundTransparency = 0.800
+HealthBarBackground.BorderColor3 = Color3.fromRGB(0, 0, 0)
+HealthBarBackground.BorderSizePixel = 0
+HealthBarBackground.Position = UDim2.new(0.0419999994, 0, 0.742999971, 6)
+HealthBarBackground.Size = UDim2.new(0, 229, 0, 8)
+local health = Instance.new("TextLabel")
+health.Name = "health"
+health.Parent = HealthBarBackground
+health.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+health.BackgroundTransparency = 1
+health.Size = UDim2.new(1, 0, 1, 0)
+health.Font = Enum.Font.Ubuntu
+health.Text = ("20 ♥")
+health.TextColor3 = Color3.fromRGB(255, 255, 255)
+health.TextSize = 8
+health.TextXAlignment = Enum.TextXAlignment.Right
+local UIPadding = Instance.new("UIPadding")
+UIPadding.Parent = health
+UIPadding.PaddingRight = UDim.new(0, 2)
+local HealthBar = Instance.new("Frame")
+HealthBar.Name = "HealthBar"
+HealthBar.Parent = HealthBarBackground
+HealthBar.BackgroundColor3 = Color3.fromRGB(150, 5, 5)
+HealthBar.BorderSizePixel = 0
+HealthBar.Position = UDim2.new(0, 0, 0, 1)
+HealthBar.Size = UDim2.new(0.7, 0, 1, 0)
+local nametext = Instance.new("TextLabel")
+nametext.Name = "nametext"
+nametext.Parent = MainFrame
+nametext.BackgroundColor3 = Color3.fromRGB(150, 5, 5)
+nametext.BackgroundTransparency = 1
+nametext.Position = UDim2.new(0.300000012, 54, 0.153999999, 0)
+nametext.Size = UDim2.new(0, 110, 0, 24)
+nametext.Font = Enum.Font.Ubuntu
+nametext.Text = "Scrxpted"
+nametext.TextColor3 = Color3.fromRGB(150, 5, 5)
+nametext.TextSize = 18
+nametext.TextXAlignment = Enum.TextXAlignment.Left
+
+shared.targetapi = {
+    ["screengui"] = BleachhackTargetHud,
+    ["targethud"] = TargetHud,
+    ["username"] = nametext,
+    ["playericon"] = playericon,
+    ["healthbar"] = HealthBar,
+    ["health"] = health,
+}
+
+return shared.targetapi
